@@ -16,7 +16,7 @@ st.markdown(
     .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp p,
     .stApp label, .stApp span, .stApp li,
     [data-testid="stMarkdownContainer"] * { color: #FFD700 !important; }
-    [data-testid="stHeader"] { background-color: #0B1F3A; }
+    [data-testid="stHeader"] { background-color: #0B1F3A; }.stApp, .stApp * { font-style: italic !important; }
     </style>
     """,
     unsafe_allow_html=True,
