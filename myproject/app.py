@@ -25,7 +25,7 @@ st.markdown(
 # ---------- Sidebar navigation ----------
 st.sidebar.title("Menu")
 app_mode = st.sidebar.selectbox(
-    "Select Page", ["My Profile", "Data Explorer", "Contact"]
+    "Select Page", ["My Profile", "Data Explorer", "Contact", "Game"]
 )
 
 # ---------- MAIN HEADER ----------
@@ -81,4 +81,24 @@ elif app_mode == "Contact":
     st.title("Contact")
     st.write("**Email:** carlvincentpilongo@gmail.com")
     st.link_button("My GitHub", "https://github.com/carlvincentpilongo-dot")
-    
+elif app_mode == "Game":
+    st.title("Guess the Number")
+    if "secret" not in st.session_state:
+        st.session_state.secret = int(np.random.randint(1, 21))
+        st.session_state.tries = 0
+
+    guess = st.number_input("Pick a number from 1 to 20", 1, 20, 10)
+    if st.button("Guess"):
+        st.session_state.tries += 1
+        if guess == st.session_state.secret:
+            st.success(f"Correct! You got it in {st.session_state.tries} tries.")
+            st.balloons()
+        elif guess < st.session_state.secret:
+            st.warning("Too low!")
+        else:
+            st.warning("Too high!")
+
+    if st.button("New game"):
+        st.session_state.secret = int(np.random.randint(1, 21))
+        st.session_state.tries = 0
+        st.rerun()
