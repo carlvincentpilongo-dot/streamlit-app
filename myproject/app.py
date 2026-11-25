@@ -36,7 +36,8 @@ def load_data():
 if app_mode == "My Profile":
     st.title("My Profile")
 
-    image_path = os.path.join(BASE_DIR, "profile.jpg")  # your photo file name
+    image_files = [f for f in os.listdir(BASE_DIR) if os.path.isfile(os.path.join(BASE_DIR, f)) and f not in ("app.py", "requirements.txt")]
+    image_path = os.path.join(BASE_DIR, image_files[0]) if image_files else ""
     col1, col2 = st.columns([1, 2])
     with col1:
         if os.path.exists(image_path):
