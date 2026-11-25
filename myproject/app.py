@@ -46,9 +46,9 @@ if app_mode == "My Profile":
     with col2:
         st.subheader("Carl Vincent O. Pilongo")
         st.write("**Course:** BES 212")
-        st.write("**Section:** (edit this)")
-        st.write("**School:** (edit this)")
-        st.write("**About me:** (write one or two sentences here)")
+        st.write("**Section:** (BSME 2B)")
+        st.write("**School:** (NEMSU Bislig)")
+        st.write("**About me:** (An irregular student, fighting to survive for the future. HUSS! HUSS! HUSS! HUSS!)")
 
 # ---------- Data Explorer ----------
 elif app_mode == "Data Explorer":
