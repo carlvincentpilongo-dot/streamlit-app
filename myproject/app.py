@@ -9,27 +9,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # ---------- Page setup ----------
 st.set_page_config(page_title="Carl Vincent O. Pilongo", page_icon="👤")
 
-# ---------- Sidebar navigation ----------
-st.sidebar.title("Menu")
-app_mode = st.sidebar.selectbox(
-    "Select Page", ["My Profile", "Home", "Exploration", "Prediction"]
-)
-
-
-# ---------- Cached data (tutorial: @st.cache_data) ----------
-@st.cache_data
-def load_data():
-    rng = np.random.default_rng(42)
-    return pd.DataFrame(
-        {
-            "ApplicantIncome": rng.integers(1000, 10000, 100),
-            "LoanAmount": rng.integers(50, 700, 100),
-            "CreditHistory": rng.integers(0, 2, 100),
-        }
-    )
-
-
-data = load_data()
 
 # ---------- MAIN HEADER ----------
 st.header("Carl Vincent O. Pilongo")
