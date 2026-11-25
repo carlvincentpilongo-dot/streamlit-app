@@ -17,6 +17,7 @@ st.markdown(
     .stApp label, .stApp span, .stApp li,
     [data-testid="stMarkdownContainer"] * { color: #FFD700 !important; }
     [data-testid="stHeader"] { background-color: #0B1F3A; }.stApp, .stApp * { font-style: italic !important; }
+    [data-testid="stImage"] img { border: 6px solid #FFD700; border-radius: 16px; box-shadow: 0 0 20px #FFD700; }
     </style>
     """,
     unsafe_allow_html=True,
