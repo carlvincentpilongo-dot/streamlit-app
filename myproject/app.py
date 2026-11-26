@@ -52,7 +52,7 @@ st.markdown(
     @property --a { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
     @keyframes spin { to { --a: 360deg; } }
     @keyframes flicker { 0%,100% { box-shadow: 0 0 14px rgba(255,140,0,0.6); } 15% { box-shadow: 0 0 30px rgba(255,220,120,0.95); } 30% { box-shadow: 0 0 10px rgba(255,120,0,0.5); } 55% { box-shadow: 0 0 34px rgba(255,200,60,0.9); } 75% { box-shadow: 0 0 16px rgba(255,140,0,0.6); } }
-    [data-testid="stImage"] { position: relative; width: fit-content; padding: 5px; border-radius: 22px; background: conic-gradient(from var(--a), rgba(255,120,0,0.25) 0deg, rgba(255,120,0,0.25) 300deg, #FF8C00 330deg, #FFD54F 348deg, #FFFFFF 358deg, #FFFFFF 360deg); animation: spin 1.8s linear infinite, flicker 1s steps(1) infinite; }
+    [data-testid="stImage"] { position: relative; width: fit-content; padding: 5px; border-radius: 22px; background: conic-gradient(from var(--a), rgba(255,120,0,1) 0deg, rgba(255,120,0,0.25) 300deg, #FF8C00 330deg, #FFD54F 348deg, #FFFFFF 358deg, #FFFFFF 360deg); animation: spin 3s linear infinite, flicker 1s steps(1) infinite; }
     [data-testid="stImage"]::after { content: ""; position: absolute; inset: -4px; padding: 9px; border-radius: 26px; background: conic-gradient(from var(--a), transparent 0deg, transparent 335deg, rgba(255,235,160,0.95) 352deg, transparent 360deg); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; filter: blur(5px); pointer-events: none; animation: spin 1.8s linear infinite; }
     [data-testid="stImage"] img { border: none; border-radius: 16px; display: block; }
     </style>
