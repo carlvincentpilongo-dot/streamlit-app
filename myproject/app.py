@@ -10,6 +10,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 def make_buzzer():
     t = np.linspace(0, 0.5, 11025, False)
     wave_data = (np.sign(np.sin(2 * np.pi * 150 * t)) * 12000).astype(np.int16)
+    wave_data = wave_data + np.random.randint(0, 3, wave_data.size).astype(np.int16)
     buf = io.BytesIO()
     with wave.open(buf, "wb") as w:
         w.setnchannels(1)
@@ -25,6 +26,7 @@ def make_chime():
         t = np.linspace(0, 0.15, int(rate * 0.15), False)
         parts.append(np.sin(2 * np.pi * f * t) * np.linspace(1, 0.6, t.size))
     data = (np.concatenate(parts) * 12000).astype(np.int16)
+    data = data + np.random.randint(0, 3, data.size).astype(np.int16)
     buf = io.BytesIO()
     with wave.open(buf, "wb") as w:
         w.setnchannels(1)
