@@ -16,8 +16,23 @@ def make_buzzer():
         w.setsampwidth(2)
         w.setframerate(22050)
         w.writeframes(wave_data.tobytes())
+    return buf.getvalue()  
+
+def make_chime():
+    rate = 22050
+    parts = []
+    for f in [523, 659, 784, 1047]:
+        t = np.linspace(0, 0.15, int(rate * 0.15), False)
+        parts.append(np.sin(2 * np.pi * f * t) * np.linspace(1, 0.6, t.size))
+    data = (np.concatenate(parts) * 12000).astype(np.int16)
+    buf = io.BytesIO()
+    with wave.open(buf, "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(rate)
+        w.writeframes(data.tobytes())
     return buf.getvalue()
-    
+
 # ---------- Page setup ----------
 st.set_page_config(page_title="Carl Vincent O. Pilongo", page_icon="👤")
 st.markdown(
@@ -134,6 +149,10 @@ elif app_mode == "Guess My Favorites":
         st.session_state.fav_i = 0
         st.session_state.fav_score = 0
         st.session_state.fav_msg = ""
+    if st.session_state.get("fav_celebrate"):
+        st.balloons()
+        st.audio(make_chime(), format="audio/wav", autoplay=True)
+        st.session_state.fav_celebrate = False
 
     if st.session_state.fav_msg:
         st.info(st.session_state.fav_msg)
@@ -163,6 +182,7 @@ elif app_mode == "Guess My Favorites":
                 st.session_state.fav_score += 1
                 st.session_state.fav_i += 1
                 st.session_state.fav_msg = "Correct!"
+                st.session_state.fav_celebrate = True
                 st.rerun()
             else:
                 st.warning("Not yet, try again!")
