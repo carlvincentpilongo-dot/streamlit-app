@@ -44,7 +44,7 @@ st.markdown(
     .stApp { background: radial-gradient(circle at top right, rgba(255,215,0,0.18), transparent 45%), linear-gradient(160deg, #0B1F3A, #050d1a); background-attachment: fixed; }
     .stApp { background-color: #0B1F3A; background-image: radial-gradient(rgba(255,215,0,0.3) 1.5px, transparent 1.5px); background-size: 30px 30px; }
     .stApp { background: repeating-linear-gradient(45deg, #0B1F3A, #0B1F3A 20px, #0e2747 20px, #0e2747 40px); }
-    .stApp { background-color: #050d1a; background-image: radial-gradient(ellipse at 20% 30%, rgba(0,255,170,0.35), transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(120,80,255,0.35), transparent 50%), radial-gradient(ellipse at 50% 90%, rgba(0,200,255,0.3), transparent 55%); background-size: 200% 200%, 200% 200%, 200% 200%; background-attachment: fixed; animation: aurora 14s ease-in-out infinite; }
+    .stApp { background: linear-gradient(135deg, #0B1F3A 0%, #12335c 50%, #050d1a 100%); background-attachment: fixed; }
     [data-testid="stSidebar"] { background-color: #08162B; }
     .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp p,
     .stApp label, .stApp span, .stApp li,
