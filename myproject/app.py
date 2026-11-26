@@ -52,10 +52,11 @@ st.markdown(
     @property --a { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
     @keyframes spin { to { --a: 360deg; } }
     @keyframes flicker { 0%,100% { box-shadow: 0 0 20px rgba(255,150,0,0.9); } 15% { box-shadow: 0 0 42px rgba(255,235,150,1); } 30% { box-shadow: 0 0 14px rgba(255,130,0,0.8); } 55% { box-shadow: 0 0 46px rgba(255,220,100,1); } 75% { box-shadow: 0 0 22px rgba(255,150,0,0.9); } }
-    [data-testid="stImage"] { position: relative; width: fit-content; padding: 5px; border-radius: 22px; background: conic-gradient(from var(--a), rgba(255,120,0,1) 0deg, rgba(255,120,0,0.25) 300deg, #FF8C00 330deg, #FFD54F 348deg, #FFFFFF 358deg, #FFFFFF 360deg); animation: spin 1.8s linear infinite, flicker 0.5s steps(1) infinite, float 3s ease-in-out infinite; }
+    [data-testid="stImage"] { position: relative; width: fit-content; padding: 5px; border-radius: 22px; background: conic-gradient(from var(--a), rgba(255,120,0,1) 0deg, rgba(255,120,0,0.25) 300deg, #FF8C00 330deg, #FFD54F 348deg, #FFFFFF 358deg, #FFFFFF 360deg); animation: spin 1.8s linear infinite, flicker 0.5s steps(1) infinite, zoom 3s ease-in-out infinite; }
     [data-testid="stImage"]::after { content: ""; position: absolute; inset: -4px; padding: 9px; border-radius: 26px; background: conic-gradient(from var(--a), transparent 0deg, transparent 335deg, rgba(255,235,160,0.95) 352deg, transparent 360deg); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; filter: blur(5px); pointer-events: none; animation: spin 1.8s linear infinite; }
     [data-testid="stImage"] img { border: none; border-radius: 16px; display: block; }
     @keyframes float { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-8px) rotate(1deg); } }
+    @keyframes zoom { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }
     </style>
     """,
     unsafe_allow_html=True,
