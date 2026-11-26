@@ -1,11 +1,23 @@
 import os
-
+import io
+import wave
 import numpy as np
 import pandas as pd
 import streamlit as st
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+def make_buzzer():
+    t = np.linspace(0, 0.5, 11025, False)
+    wave_data = (np.sign(np.sin(2 * np.pi * 150 * t)) * 12000).astype(np.int16)
+    buf = io.BytesIO()
+    with wave.open(buf, "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(22050)
+        w.writeframes(wave_data.tobytes())
+    return buf.getvalue()
+    
 # ---------- Page setup ----------
 st.set_page_config(page_title="Carl Vincent O. Pilongo", page_icon="👤")
 st.markdown(
@@ -25,7 +37,7 @@ st.markdown(
 # ---------- Sidebar navigation ----------
 st.sidebar.title("Menu")
 app_mode = st.sidebar.selectbox(
-    "Select Page", ["My Profile", "Data Explorer", "Contact", "Game"]
+    "Select Page", ["My Profile", "Data Explorer", "Contact", "Game", "Guess My Favorites"]
 )
 
 # ---------- MAIN HEADER ----------
@@ -102,3 +114,61 @@ elif app_mode == "Game":
         st.session_state.secret = int(np.random.randint(1, 21))
         st.session_state.tries = 0
         st.rerun()
+elif app_mode == "Guess My Favorites":
+    st.title("Guess My Favorites")
+
+    favorites = [
+        {"category": "Color", "answers": ["blue"], "clue": "Number 5 in the rainbow"},
+        {"category": "Dish", "answers": ["adobo"], "clue": "Soy sauce"},
+        {"category": "Fruit", "answers": ["orange"], "clue": "Sharmaine"},
+        {"category": "Game", "answers": ["mobile legends bang bang", "mobile legends", "mlbb"], "clue": "E-games"},
+        {"category": "Dessert", "answers": ["mango float"], "clue": "Floating"},
+        {"category": "Animal", "answers": ["bird"], "clue": "Can sing"},
+        {"category": "Subject", "answers": ["recess"], "clue": "Lasts only 15 minutes"},
+        {"category": "Drink", "answers": ["water"], "clue": "Water"},
+        {"category": "Number", "answers": ["28"], "clue": "", "latex": r"\lim_{x \to 4} \dfrac{x^2 + 20x - 96}{x - 4}"},
+        {"category": "Letter", "answers": ["c"], "clue": "(it's on you now)"},
+    ]
+
+    if "fav_i" not in st.session_state:
+        st.session_state.fav_i = 0
+        st.session_state.fav_score = 0
+        st.session_state.fav_msg = ""
+
+    if st.session_state.fav_msg:
+        st.info(st.session_state.fav_msg)
+        st.session_state.fav_msg = ""
+
+    i = st.session_state.fav_i
+    if i >= len(favorites):
+        st.success(f"Game over! Your score: {st.session_state.fav_score} / {len(favorites)}")
+        st.balloons()
+        if st.button("Play again"):
+            st.session_state.fav_i = 0
+            st.session_state.fav_score = 0
+            st.rerun()
+    else:
+        item = favorites[i]
+        st.subheader(f"{i + 1} of {len(favorites)}: My favorite {item['category']}")
+        st.write("Clue:")
+        if "latex" in item:
+            st.latex(item["latex"])
+        else:
+            st.write(item["clue"])
+
+        answer = st.text_input("Your answer", key=f"ans_{i}")
+        col_a, col_b = st.columns(2)
+        if col_a.button("Submit"):
+            if answer.strip().lower() in item["answers"]:
+                st.session_state.fav_score += 1
+                st.session_state.fav_i += 1
+                st.session_state.fav_msg = "Correct!"
+                st.rerun()
+            else:
+                st.warning("Not yet, try again!")
+                st.audio(make_buzzer(), format="audio/wav", autoplay=True)
+        if col_b.button("Skip"):
+            st.session_state.fav_i += 1
+            st.session_state.fav_msg = "The answer was: " + item["answers"][0].title()
+            st.rerun()
+        
