@@ -49,7 +49,10 @@ st.markdown(
     .stApp label, .stApp span, .stApp li,
     [data-testid="stMarkdownContainer"] * { color: #FFD700 !important; }
     [data-testid="stHeader"] { background-color: #0B1F3A; }.stApp, .stApp * { font-style: italic !important; }
-    [data-testid="stImage"] img { border: 6px solid #FFD700; border-radius: 16px; box-shadow: 0 0 20px #FFD700; }
+    @property --a { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+    @keyframes spin { to { --a: 360deg; } }
+    [data-testid="stImage"] { width: fit-content; padding: 6px; border-radius: 22px; background: conic-gradient(from var(--a), rgba(255,195,0,0.3) 0deg, rgba(255,195,0,0.3) 230deg, #FFC300 290deg, #FFE066 340deg, #FFD700 360deg); animation: spin 3s linear infinite; box-shadow: 0 0 22px rgba(255,215,0,0.55); }
+    [data-testid="stImage"] img { border: none; border-radius: 16px; display: block; }
     </style>
     """,
     unsafe_allow_html=True,
