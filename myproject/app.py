@@ -38,7 +38,10 @@ st.set_page_config(page_title="Carl Vincent O. Pilongo", page_icon="👤")
 st.markdown(
     """
     <style>
-    .stApp { background-color: #0B1F3A; }
+    .stApp { background: linear-gradient(135deg, #0B1F3A 0%, #12335c 50%, #050d1a 100%); background-attachment: fixed; }
+    .stApp { background: radial-gradient(circle at top right, rgba(255,215,0,0.18), transparent 45%), linear-gradient(160deg, #0B1F3A, #050d1a); background-attachment: fixed; }
+    .stApp { background-color: #0B1F3A; background-image: radial-gradient(rgba(255,215,0,0.3) 1.5px, transparent 1.5px); background-size: 30px 30px; }
+    .stApp { background: repeating-linear-gradient(45deg, #0B1F3A, #0B1F3A 20px, #0e2747 20px, #0e2747 40px); }
     [data-testid="stSidebar"] { background-color: #08162B; }
     .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp p,
     .stApp label, .stApp span, .stApp li,
